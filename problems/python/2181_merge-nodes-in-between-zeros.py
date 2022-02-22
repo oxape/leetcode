@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2022-02-21 09:30:29
-LastEditTime: 2022-02-21 15:32:45
+LastEditTime: 2022-02-21 15:37:45
 LastEditors: Please set LastEditors
 Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 FilePath: /leetcode/problems/python/6013_merge-nodes-in-between-zeros.py
@@ -37,6 +37,22 @@ class Solution:
                 break
         return head
 
+    def mergeNodesV1(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        lastZeroNode = head
+        currentNode = head.next
+        while True:
+            if currentNode.val != 0:
+                lastZeroNode.val += currentNode.val
+            else:
+                if currentNode.next is None:
+                    lastZeroNode.next = None
+                    break
+                else:
+                    lastZeroNode.next = currentNode
+                    lastZeroNode = currentNode
+            # 这里隐含题目假设val非0时肯定有后续的节点
+            currentNode = currentNode.next
+        return head
 
 if __name__ == '__main__':
     nums = [0,3,1,0,4,5,2,0]
@@ -50,7 +66,7 @@ if __name__ == '__main__':
         else:
             last_node.next = tmp
             last_node = tmp
-    node = Solution().mergeNodes(head)
+    node = Solution().mergeNodesV1(head)
     while True:
         if node == None:
             break
