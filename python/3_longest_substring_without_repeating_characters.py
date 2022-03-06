@@ -35,15 +35,16 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        current_dict = dict()
-        nums = 0
-        start = 0
-        max_length = 0
+        # 使用循环不变量分析
+        current_dict = dict() # 不同字符在0-index之间最后一个的位置
+        nums = 0 # 最后一个字符到前一个相同字符
+        max_length = 0 # 0-index之间无重复字符子串最长长度
         for index, c in enumerate(s):
             if c in current_dict:
                 if nums > max_length:
                     max_length = nums
                 current_character_index = (current_dict[c] + 1)
+                # index - current_character_index + 1 最后一个字符c
                 nums = min(index - current_character_index + 1, nums + 1)
                 current_dict[c] = index
             else:
@@ -58,7 +59,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        # 由于都是可见字符，这里使用array可以获得比dict更好的时间性能，有与hash算法，当所有字符都出现时，可能空间上也能更优
+        # 由于都是可见字符，这里使用array可以获得比dict更好的时间性能，由于hash算法，当所有字符都出现时，可能空间上也能更优
         bucket = [-1]*128
         nums = 0
         max_length = 0
