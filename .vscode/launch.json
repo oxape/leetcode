@@ -29,16 +29,40 @@
                 }
             ]
         },
-
-
         {
-            "name": "Python: Current File",
-            "type": "python",
+            "name": "lang",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${file}",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+            "args": [],
+            "stopAtEntry": false,
             "cwd": "${fileDirname}",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        }
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+
+        // {
+        //     "name": "Python: Current File",
+        //     "type": "python",
+        //     "request": "launch",
+        //     "program": "${file}",
+        //     "cwd": "${fileDirname}",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true
+        // }
     ]
 }
